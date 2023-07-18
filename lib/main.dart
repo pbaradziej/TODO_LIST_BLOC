@@ -1,42 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_bloc/injection_container.dart';
+import 'package:todo_list_bloc/presentation/components/to_do_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  init();
+  runApp(const ToDoListApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ToDoListApp extends StatelessWidget {
+  const ToDoListApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Flutter Demo Home Page'),
-      ),
-      body: const SizedBox(),
+      home: const ToDoList(),
     );
   }
 }

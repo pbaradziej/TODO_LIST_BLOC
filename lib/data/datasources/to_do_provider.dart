@@ -6,7 +6,7 @@ class ToDoProvider extends SharedPreferencesProvider {
 
   Future<String> getToDoItems() async {
     return withPreferences<String>((SharedPreferences preferences) async {
-      return preferences.getString(_itemsKey) ?? '';
+      return preferences.getString(_itemsKey) ?? '[]';
     });
   }
 

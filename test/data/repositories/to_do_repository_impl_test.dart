@@ -28,79 +28,29 @@ void main() {
   });
 
   group('to do item list operations', () {
-    test('should get items list', () async {
+    test('should get items', () async {
       // arrange
       final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
       mockItemsData(toDoItemsData, toDoProvider);
 
       // act
       final List<ToDoItem> toDoItems = await repository.getToDoItems();
+
       // assert
       expect(toDoItems, <ToDoItem>[toDoItemModel]);
     });
 
-    test('should add one item to the list', () async {
-      // arrange
-      final List<ToDoItem> toDoItemsData = <ToDoItem>[];
-      mockItemsData(toDoItemsData, toDoProvider);
-
-      // act
-      final List<ToDoItem> toDoItems = await repository.getToDoItems();
-      expect(toDoItems, <ToDoItem>[]);
-      final List<ToDoItem> updatedToDoItems = await repository.addToDoItem(toDoItemModel);
-      // assert
-      expect(updatedToDoItems, <ToDoItem>[toDoItemModel]);
-    });
-
-    test('should edit one item to the list', () async {
-      // arrange
-      final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
-      mockItemsData(toDoItemsData, toDoProvider);
-
-      // arrange
-      final ToDoItem updatedToDoItem = ToDoItem(
-        text: 'updatedText',
-        guid: 'uniqueGuid',
-        isComplete: true,
-      );
-
-      // act
-      final List<ToDoItem> toDoItems = await repository.getToDoItems();
-      expect(toDoItems, <ToDoItem>[toDoItemModel]);
-      final List<ToDoItem> updatedToDoItems = await repository.editToDoItem(toDoItemModel.guid, 'updatedText');
-      // assert
-      expect(updatedToDoItems, <ToDoItem>[updatedToDoItem]);
-    });
-
-    test('should remove one item to the list', () async {
+    test('should set items', () async {
       // arrange
       final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
       mockItemsData(toDoItemsData, toDoProvider);
 
       // act
+      await repository.setToDoItems(toDoItemsData);
+
+      // assert
       final List<ToDoItem> toDoItems = await repository.getToDoItems();
       expect(toDoItems, <ToDoItem>[toDoItemModel]);
-      final List<ToDoItem> updatedToDoItems = await repository.removeToDoItem(toDoItemModel.guid);
-      // assert
-      expect(updatedToDoItems, <ToDoItem>[]);
-    });
-
-    test('should change completion of one item to the list', () async {
-      // arrange
-      final ToDoItem updatedToDoItem = ToDoItem(
-        text: 'todoItem',
-        guid: 'uniqueGuid',
-        isComplete: false,
-      );
-      final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
-      mockItemsData(toDoItemsData, toDoProvider);
-
-      // act
-      final List<ToDoItem> toDoItems = await repository.getToDoItems();
-      expect(toDoItems, <ToDoItem>[toDoItemModel]);
-      final List<ToDoItem> updatedToDoItems = await repository.changeCompletionOfToDoItem(toDoItemModel.guid, false);
-      // assert
-      expect(updatedToDoItems, <ToDoItem>[updatedToDoItem]);
     });
   });
 }

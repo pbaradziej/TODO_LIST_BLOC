@@ -12,48 +12,37 @@ void main() {
 
   setUp(() {
     mockToDoRepository = MockToDoRepository();
-    usecase = ToDoActions(mockToDoRepository);
+    usecase = ToDoActions(repository: mockToDoRepository);
   });
 
   final ToDoItem toDoItem = ToDoItem(text: 'test');
 
   test('should get todos from the repository', () async {
+    // arrange
     when(() => mockToDoRepository.getToDoItems()).thenAnswer((_) async => <ToDoItem>[toDoItem, toDoItem]);
+
+    // act
     final List<ToDoItem> result = await usecase.getToDoItems();
+
+    // assert
     expect(result, <ToDoItem>[toDoItem, toDoItem]);
     verify(() => mockToDoRepository.getToDoItems());
     verifyNoMoreInteractions(mockToDoRepository);
   });
 
-  test('should add todo to the repository', () async {
-    when(() => mockToDoRepository.addToDoItem(toDoItem)).thenAnswer((_) async => <ToDoItem>[toDoItem]);
-    final List<ToDoItem> result = await usecase.addToDoItem(toDoItem);
-    expect(result, <ToDoItem>[toDoItem]);
-    verify(() => mockToDoRepository.addToDoItem(toDoItem));
-    verifyNoMoreInteractions(mockToDoRepository);
-  });
+  test('should set todos in the repository', () async {
+    // arrange
+    when(() => mockToDoRepository.getToDoItems()).thenAnswer((_) async => <ToDoItem>[toDoItem]);
+    when(() => mockToDoRepository.setToDoItems(<ToDoItem>[toDoItem])).thenAnswer((_) async {});
 
-  test('should edit todo in the repository', () async {
-    when(() => mockToDoRepository.editToDoItem('test', 'test')).thenAnswer((_) async => <ToDoItem>[toDoItem]);
-    final List<ToDoItem> result = await usecase.editToDoItem('test', 'test');
-    expect(result, <ToDoItem>[toDoItem]);
-    verify(() => mockToDoRepository.editToDoItem('test', 'test'));
-    verifyNoMoreInteractions(mockToDoRepository);
-  });
+    // act
+    await usecase.setToDoItems(<ToDoItem>[toDoItem]);
 
-  test('should remove todo from the repository', () async {
-    when(() => mockToDoRepository.removeToDoItem('guid')).thenAnswer((_) async => <ToDoItem>[]);
-    final List<ToDoItem> result = await usecase.removeToDoItem('guid');
-    expect(result, <ToDoItem>[]);
-    verify(() => mockToDoRepository.removeToDoItem('guid'));
-    verifyNoMoreInteractions(mockToDoRepository);
-  });
-
-  test('should change completion of to do item from the repository', () async {
-    when(() => mockToDoRepository.changeCompletionOfToDoItem('guid', true)).thenAnswer((_) async => <ToDoItem>[toDoItem]);
-    final List<ToDoItem> result = await usecase.changeCompletionOfToDoItem('guid', true);
+    // assert
+    final List<ToDoItem> result = await usecase.getToDoItems();
     expect(result, <ToDoItem>[toDoItem]);
-    verify(() => mockToDoRepository.changeCompletionOfToDoItem('guid', true));
+    verify(() => mockToDoRepository.setToDoItems(<ToDoItem>[toDoItem]));
+    verify(() => mockToDoRepository.getToDoItems());
     verifyNoMoreInteractions(mockToDoRepository);
   });
 }
