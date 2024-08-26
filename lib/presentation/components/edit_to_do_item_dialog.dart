@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_bloc/domain/entities/to_do_item.dart';
-import 'package:todo_list_bloc/presentation/cubit/to_do_cubit.dart';
+import 'package:todo_list_bloc/l10n/l10n.dart';
+import 'package:todo_list_bloc/presentation/cubit/to_do/to_do_cubit.dart';
 
 class EditToDoItemDialog {
   final ToDoItem toDoItem;
@@ -11,36 +12,36 @@ class EditToDoItemDialog {
   EditToDoItemDialog({
     required this.toDoItem,
     required this.context,
-  })  : editorToDoController = TextEditingController(text: toDoItem.text);
+  }) : editorToDoController = TextEditingController(text: toDoItem.text);
 
   void showEditDialog() {
     showDialog<void>(
       context: context,
       builder: (final BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit todo'),
+          title: Text(context.translations.tab_edit_title),
           content: Container(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                editorTextField(),
+                editorTextField(context),
               ],
             ),
           ),
           actions: <Widget>[
-            dialogActions(),
+            dialogActions(context),
           ],
         );
       },
     );
   }
 
-  Widget editorTextField() {
+  Widget editorTextField(BuildContext context) {
     return TextField(
       controller: editorToDoController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Edit text',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: context.translations.tab_edit_placeholder,
       ),
       onSubmitted: (_) {
         editToDoItem();
@@ -48,7 +49,7 @@ class EditToDoItemDialog {
     );
   }
 
-  Widget dialogActions() {
+  Widget dialogActions(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -56,14 +57,14 @@ class EditToDoItemDialog {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Cancel'),
+          child: Text(context.translations.tab_edit_cancel),
         ),
         ElevatedButton(
           onPressed: () {
             editToDoItem();
             Navigator.of(context).pop();
           },
-          child: const Text('Save'),
+          child: Text(context.translations.tab_edit_save),
         ),
       ],
     );

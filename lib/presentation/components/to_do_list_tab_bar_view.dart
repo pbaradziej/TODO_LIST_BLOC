@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_bloc/presentation/components/to_do_list_content.dart';
 import 'package:todo_list_bloc/presentation/components/to_do_list_view.dart';
-import 'package:todo_list_bloc/presentation/cubit/to_do_cubit.dart';
+import 'package:todo_list_bloc/presentation/cubit/to_do/to_do_cubit.dart';
 
 class ToDoListTabBarView extends StatefulWidget {
   const ToDoListTabBarView({Key? key}) : super(key: key);

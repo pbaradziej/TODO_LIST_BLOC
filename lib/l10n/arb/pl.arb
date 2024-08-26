@@ -1,0 +1,11 @@
+{
+    "@@locale": "pl",
+    "title": "Lista TODO",
+    "tab_todo_label": "Do zrobienia",
+    "tab_done_label": "Zrobione",
+    "tab_add_placeholder": "Wpisz tekst",
+    "tab_edit_title": "Edytuj TODO",
+    "tab_edit_placeholder": "Edytuj tekst",
+    "tab_edit_cancel": "Anuluj",
+    "tab_edit_save": "Zapisz"
+}

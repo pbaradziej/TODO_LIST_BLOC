@@ -1,0 +1,21 @@
+{
+    "@@locale": "en",
+    "title": "TODO List",
+    "tab_todo_label": "To do",
+    "tab_done_label": "Done",
+    "tab_add_placeholder": "Type text",
+    "tab_edit_title": "Edit TODO",
+    "tab_edit_placeholder": "Edit text",
+    "tab_edit_cancel": "Cancel",
+    "tab_edit_save": "Save",
+    "list_item_done_ago": "done {when}",
+    "@list_item_done_ago": {
+        "description": "Small caps date when item was marked as done.",
+        "placeholders": {
+            "when": {
+                "type": "String",
+                "example": "a minute ago"
+            }
+        }
+    }
+}

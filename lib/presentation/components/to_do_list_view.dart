@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_bloc/domain/entities/to_do_item.dart';
 import 'package:todo_list_bloc/presentation/components/edit_to_do_item_dialog.dart';
-import 'package:todo_list_bloc/presentation/cubit/to_do_cubit.dart';
+import 'package:todo_list_bloc/presentation/cubit/to_do/to_do_cubit.dart';
 
 class ToDoListView extends StatefulWidget {
   final bool isCompletedTab;

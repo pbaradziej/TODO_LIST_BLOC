@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_bloc/domain/entities/to_do_item.dart';
+import 'package:todo_list_bloc/l10n/l10n.dart';
 import 'package:todo_list_bloc/presentation/components/to_do_list_view.dart';
-import 'package:todo_list_bloc/presentation/cubit/to_do_cubit.dart';
+import 'package:todo_list_bloc/presentation/cubit/to_do/to_do_cubit.dart';
 
 class ToDoListContent extends StatefulWidget {
   const ToDoListContent({Key? key}) : super(key: key);
@@ -41,9 +42,9 @@ class _ToDoListContentState extends State<ToDoListContent> {
         Expanded(
           child: TextField(
             controller: adderToDoController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Input text',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: context.translations.tab_add_placeholder,
             ),
             onSubmitted: (_) {
               final String text = adderToDoController.text;

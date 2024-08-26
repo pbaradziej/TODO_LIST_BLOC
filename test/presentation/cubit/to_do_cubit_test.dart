@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:todo_list_bloc/data/models/to_do_item_model.dart';
 import 'package:todo_list_bloc/domain/entities/to_do_item.dart';
 import 'package:todo_list_bloc/domain/usecases/to_do_actions.dart';
-import 'package:todo_list_bloc/presentation/cubit/to_do_cubit.dart';
+import 'package:todo_list_bloc/presentation/cubit/to_do/to_do_cubit.dart';
 
 class MockToDoActions extends Mock implements ToDoActions {}
 
