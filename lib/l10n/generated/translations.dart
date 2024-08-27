@@ -101,6 +101,12 @@ abstract class Translations {
   /// **'TODO List'**
   String get title;
 
+  /// No description provided for @translation_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Change language '**
+  String get translation_button;
+
   /// No description provided for @tab_todo_label.
   ///
   /// In en, this message translates to:

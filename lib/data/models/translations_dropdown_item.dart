@@ -1,0 +1,4 @@
+enum TranslationsDropdownItem {
+  pl,
+  en
+}

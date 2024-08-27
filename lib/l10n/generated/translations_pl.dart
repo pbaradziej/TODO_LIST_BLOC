@@ -10,6 +10,9 @@ class TranslationsPl extends Translations {
   String get title => 'Lista TODO';
 
   @override
+  String get translation_button => 'Zmień język ';
+
+  @override
   String get tab_todo_label => 'Do zrobienia';
 
   @override

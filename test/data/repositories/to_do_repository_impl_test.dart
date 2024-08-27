@@ -19,6 +19,7 @@ void main() {
     guid: 'uniqueGuid',
     isComplete: true,
   );
+  const Locale locale = Locale('en');
 
   setUp(() {
     toDoProvider = MockToDoProvider();
@@ -31,7 +32,7 @@ void main() {
     test('should get items', () async {
       // arrange
       final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
-      mockItemsData(toDoItemsData, toDoProvider);
+      mockItemsData(toDoProvider, toDoItemsData);
 
       // act
       final List<ToDoItem> toDoItems = await repository.getToDoItems();
@@ -43,7 +44,7 @@ void main() {
     test('should set items', () async {
       // arrange
       final List<ToDoItem> toDoItemsData = <ToDoItem>[toDoItemModel];
-      mockItemsData(toDoItemsData, toDoProvider);
+      mockItemsData(toDoProvider, toDoItemsData);
 
       // act
       await repository.setToDoItems(toDoItemsData);
@@ -52,12 +53,38 @@ void main() {
       final List<ToDoItem> toDoItems = await repository.getToDoItems();
       expect(toDoItems, <ToDoItem>[toDoItemModel]);
     });
+
+    test('should get translations', () async {
+      // arrange
+      mockItemsData(toDoProvider);
+
+      // act
+      final Locale translations = await repository.getTranslations();
+
+      // assert
+      expect(translations, locale);
+    });
+
+    test('should set translations', () async {
+      // arrange
+      mockItemsData(toDoProvider);
+
+      // act
+      await repository.setTranslations(locale);
+
+      // assert
+      final Locale translations = await repository.getTranslations();
+      expect(translations, locale);
+    });
   });
 }
 
-void mockItemsData(List<ToDoItem> toDoItems, ToDoProvider toDoProvider) {
-  final List<Map<String, Object>> mappedToDoItems = toDoItems.map<Map<String, Object>>(ToDoItemModel.toMap).toList();
+void mockItemsData(ToDoProvider toDoProvider, [List<ToDoItem>? toDoItems]) {
+  final List<Map<String, Object>>? mappedToDoItems = toDoItems?.map<Map<String, Object>>(ToDoItemModel.toMap).toList();
   final String encodedItems = json.encode(mappedToDoItems);
   when(() => toDoProvider.getToDoItems()).thenAnswer((_) async => encodedItems);
   when(() => toDoProvider.setToDoItems(any())).thenAnswer((_) async {});
+  final String translations = const Locale('en').languageCode;
+  when(() => toDoProvider.getTranslations()).thenAnswer((_) async => translations);
+  when(() => toDoProvider.setTranslations(any())).thenAnswer((_) async {});
 }

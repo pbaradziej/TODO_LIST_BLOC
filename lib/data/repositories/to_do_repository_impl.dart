@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:todo_list_bloc/data/datasources/to_do_provider.dart';
 import 'package:todo_list_bloc/data/models/to_do_item_model.dart';
 import 'package:todo_list_bloc/domain/entities/to_do_item.dart';
@@ -29,5 +30,16 @@ class ToDoRepositoryImpl implements ToDoRepository {
     final List<Map<String, Object>> mappedToDoItems = toDoItems.map<Map<String, Object>>(ToDoItemModel.toMap).toList();
     final String encodedItems = json.encode(mappedToDoItems);
     await toDoProvider.setToDoItems(encodedItems);
+  }
+
+  @override
+  Future<Locale> getTranslations() async {
+    final String? languageCode = await toDoProvider.getTranslations();
+    return languageCode != null ? Locale(languageCode) : const Locale('en');
+  }
+
+  @override
+  Future<void> setTranslations(Locale locale) async {
+    await toDoProvider.setTranslations(locale.languageCode);
   }
 }

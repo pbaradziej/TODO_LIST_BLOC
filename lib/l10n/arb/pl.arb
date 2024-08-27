@@ -1,6 +1,7 @@
 {
     "@@locale": "pl",
     "title": "Lista TODO",
+    "translation_button": "Zmień język ",
     "tab_todo_label": "Do zrobienia",
     "tab_done_label": "Zrobione",
     "tab_add_placeholder": "Wpisz tekst",

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_bloc/injection_container.dart';
-import 'package:todo_list_bloc/presentation/components/to_do_list.dart';
+import 'package:todo_list_bloc/presentation/cubit/home/home_cubit.dart';
+import 'package:todo_list_bloc/todo_app.dart';
 
 void main() {
   init();
@@ -12,12 +14,9 @@ class ToDoListApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
-        useMaterial3: true,
-      ),
-      home: const ToDoList(),
+    return BlocProvider<HomeCubit>(
+      create: (_) => sl<HomeCubit>(),
+      child: const TodoApp(),
     );
   }
 }
